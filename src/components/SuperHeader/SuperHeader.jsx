@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 	background-color: ${COLORS.gray[900]};
 
 	display: flex;
-	gap: 24px;
+	gap: ${24 / 16}rem;
 	height: ${40 / 16}rem;
 	align-items: center;
 	padding: 0 32px;
