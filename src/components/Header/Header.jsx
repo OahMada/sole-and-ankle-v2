@@ -31,18 +31,15 @@ const MainHeader = styled.div`
 	border-bottom: 1px solid ${COLORS.gray[300]};
 
 	display: flex;
-	justify-content: center;
 	align-items: center;
 
 	height: ${72 / 16}rem;
-	padding: 0 32px;
-
-	position: relative;
 `;
 
 const Nav = styled.nav`
 	display: flex;
 	gap: ${48 / 16}rem;
+	margin: 0 auto;
 `;
 
 const NavLink = styled.a`
