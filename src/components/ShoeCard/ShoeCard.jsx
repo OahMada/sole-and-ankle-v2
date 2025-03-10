@@ -23,19 +23,42 @@ const ShoeCard = ({ slug, name, imageSrc, price, salePrice, releaseDate, numOfCo
       ? 'new-release'
       : 'default'
 
+	let priceFlag = {};
+
+	switch (variant) {
+		case 'on-sale':
+			priceFlag.text = 'Sale';
+			priceFlag.backgroundColor = COLORS.primary;
+			break;
+		case 'new-release':
+			priceFlag.text = 'Just Released!';
+			priceFlag.backgroundColor = COLORS.secondary;
+			break;
+
+		default:
+			priceFlag = undefined;
+			break;
+	}
+
+	let onSale = variant === 'on-sale';
+
 	return (
 		<Link href={`/shoe/${slug}`}>
 			<Wrapper>
 				<ImageWrapper>
 					<Image alt='' src={imageSrc} />
+					{priceFlag && <PriceFlag style={{ '--backgroundColor': priceFlag.backgroundColor }}>{priceFlag.text}</PriceFlag>}
 				</ImageWrapper>
 				<Spacer size={12} />
 				<Row>
 					<Name>{name}</Name>
-					<Price>{formatPrice(price)}</Price>
+					<Price style={{ '--color': onSale ? COLORS.gray[700] : COLORS.gray[900], '--text-decoration': onSale ? 'line-through' : 'none' }}>
+						{formatPrice(price)}
+					</Price>
 				</Row>
 				<Row>
 					<ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+					{onSale && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
 				</Row>
 			</Wrapper>
 		</Link>
@@ -45,12 +68,10 @@ const ShoeCard = ({ slug, name, imageSrc, price, salePrice, releaseDate, numOfCo
 const Link = styled.a`
 	text-decoration: none;
 	color: inherit;
-	flex: 1 0 345px;
+	flex: 1 0 340px;
 `;
 
 const Wrapper = styled.article`
-	border-radius: 16px 16px 4px 4px;
-	overflow: hidden;
 	margin-bottom: 30px;
 `;
 
@@ -60,6 +81,7 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
 	width: 100%;
+	border-radius: 16px 16px 4px 4px;
 `;
 
 const Row = styled.div`
@@ -73,7 +95,10 @@ const Name = styled.h3`
 	color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+	color: var(--color);
+	text-decoration: var(--text-decoration);
+`;
 
 const ColorInfo = styled.p`
 	color: ${COLORS.gray[700]};
@@ -82,6 +107,20 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
 	font-weight: ${WEIGHTS.medium};
 	color: ${COLORS.primary};
+`;
+
+var PriceFlag = styled.span`
+	display: block;
+	color: ${COLORS.white};
+	background-color: var(--backgroundColor);
+	width: max-content;
+	font-size: ${14 / 16}rem;
+	font-weight: ${WEIGHTS.bold};
+	padding: 9px;
+	border-radius: 2px;
+	position: absolute;
+	top: 12px;
+	right: -4px;
 `;
 
 export default ShoeCard;
