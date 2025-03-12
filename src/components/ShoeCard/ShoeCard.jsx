@@ -52,7 +52,7 @@ const ShoeCard = ({ slug, name, imageSrc, price, salePrice, releaseDate, numOfCo
 				<Spacer size={12} />
 				<Row>
 					<Name>{name}</Name>
-					<Price style={{ '--color': onSale ? COLORS.gray[700] : COLORS.gray[900], '--text-decoration': onSale ? 'line-through' : 'none' }}>
+					<Price style={{ '--color': onSale ? COLORS.gray[700] : undefined, '--text-decoration': onSale ? 'line-through' : 'none' }}>
 						{formatPrice(price)}
 					</Price>
 				</Row>
@@ -113,10 +113,12 @@ var PriceFlag = styled.span`
 	display: block;
 	color: ${COLORS.white};
 	background-color: var(--backgroundColor);
-	width: max-content;
+	/* width: max-content; this is unnecessary */
 	font-size: ${14 / 16}rem;
 	font-weight: ${WEIGHTS.bold};
-	padding: 9px;
+	padding: 0 9px;
+	height: ${32 / 16}rem;
+	line-height: ${32 / 16}rem;
 	border-radius: 2px;
 	position: absolute;
 	top: 12px;

@@ -40,13 +40,12 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row-reverse;
 	gap: 32px;
+	align-items: baseline;
 `;
 
 const LeftColumn = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	flex: 0 0 250px;
+	flex: 0 1 250px;
+	/* Because the main column has a flex basis of 0%, the flex shrink on the left column is not going to kick in. */
 `;
 
 const MainColumn = styled.div`

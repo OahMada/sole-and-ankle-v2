@@ -29,7 +29,7 @@ const Select = ({ label, value, children, ...delegated }) => {
 const Wrapper = styled.label`
 	display: flex;
 	gap: ${16 / 16}rem;
-	align-items: center;
+	align-items: baseline;
 `;
 
 const VisibleLabel = styled.span`
